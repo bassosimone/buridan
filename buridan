@@ -1,0 +1,34 @@
+#!/usr/bin/perl -w
+# $Id: buridan,v 1.1 2010/01/03 13:46:00 simone Exp $
+
+#
+# Copyright (c) 2010 Simone Basso <bassosimone@gmail.com>
+# Released under ISC license
+#
+# buridan -- Avoid some free will-related problems.
+# See for example http://bit.ly/rMaP (wikipedia.org)
+#
+# Example usage
+#   $ ./buridan 'a b c' 'd e f g' 'h i j'
+#   0.144451821995066	=>	'a b c'
+#   0.24117388678448	=>	'd e f g'
+#   0.560108705462095	=>	'h i j'
+#   $
+#
+
+my %table;
+my @keys;
+my $n;
+
+if (@ARGV > 0) {
+	foreach (@ARGV) {
+		$n = rand();
+		$table{$n} = $_;
+	}
+	@keys = sort(keys(%table));
+	foreach (@keys) {
+		print "$_\t=>\t'$table{$_}'\n";
+	}
+} else {
+	print "Usage: buridan item [item...]\n";
+}
